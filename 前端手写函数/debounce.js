@@ -18,3 +18,13 @@ function debounce(func,delay){
     },delay);
   }
 }
+
+function debounce2(func, delay){
+  let timer = null;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func(...args);
+    },delay)
+  }
+}
