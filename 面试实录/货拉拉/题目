@@ -1,0 +1,70 @@
+<h1>************************** 题目一 **************************</h1>
+<html>
+<head>
+<style>
+  body > div {
+    width: 100px;
+    height: 100px;
+    background: green;
+  }
+
+  .test1 {
+    text-align: center;
+    line-height: 100px;
+  }
+
+  .test2 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform
+    
+    ; 或者margin: auto;
+    ; 或者使用flex: justify
+  }
+typeof 
+
+  .test3 {
+    
+  }
+</style>
+</head>
+
+<body>
+  <h2>题目1、将方块内的文字 水平+垂直居中</h2>
+  <div class="test1">文字居中</div>
+  <h2>题目2、将方块在整个页面中 水平+垂直居中</h2>
+  <div class="test2"></div>
+  <h2>题目3、将方块实现成一个三角形</h2>
+  <div class="test3"></div>
+</body>
+</html>
+
+
+
+
+<h1>************************** 题目二 **************************</h1>
+<script type="text/javascript">
+    // 题目2：解析一个 URL 里的参数部分，返回一个对象
+    function getUrlParams(url) {
+
+        return {};
+    }
+
+    // 以下例子输出为 { a: 'a', b: '', c: '3' }
+    console.log(getUrlParams('https://ltl.huolala.cn/#/?a=a&b=&c=3'));
+</script>
+
+
+
+<h1>************************** 题目三 **************************</h1>
+<script type="text/javascript">
+    // 实现根据输入数值，输出格式化时间显示；显示如下console所示。
+    function formatSecond(value) {
+        return 'TODO';
+    }
+
+    console.log(formatSecond(59)); // 59秒
+    console.log(formatSecond(60)); // 1分00秒
+    console.log(formatSecond(3601)); // 1小时00分01秒
+</script>
