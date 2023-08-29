@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  this.name = 'ByteDance';
+
+  function A() {
+    this.name = 123;
+    this.getName = function () {
+      console.log(this.name + 1);
+    }
+  }
+
+  const a = new A();
+  const funcA = a.getName;
+  funcA();
+
+//   this.name = 'ByteDance';
+
+function B(){
+  this.name = 123;
+  this.getName = () => {
+    console.log(this.name + 1);
+  }
+}
+
+const b = new B();
+const funcB = b.getName;
+funcB();
+
+Function.prototype.a1 = function(){console.log('a111')};
+Object.prototype.a2 = function(){console.log('a222')};
+function Cat(){};
+const c1 = new Cat();
+console.log(c1);
+c1.__proto__ = Function.prototype;
+c1.a1();
+c1.a2();
+</script>
+
+</html>

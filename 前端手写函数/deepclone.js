@@ -1,3 +1,11 @@
+// 深拷贝
+// 现有的轮子：`lodash`库中的`_.cloneDeep(obj)_`
+// 自己写见手写算法题部分，主要思路
+// - 首先看是否是简单数据类型，是-直接返回
+// - 利用`constructor`看是不是Date、Function、RegExp、Map、Set，是的话调用构造函数
+// - 为了防止循环引用，闭包一个map，如果已经出现过则直接返回，否则新生成
+// - 利用拷贝循环进行拷贝
+
 const deepClone = (target, map = new WeakMap()) => {
   if(typeof target !== 'object' || target === null)return target;
   
