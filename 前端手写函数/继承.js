@@ -20,3 +20,4 @@ Son.prototype.__proto__ = Object.create(Parent.prototype);
 const son1 = new Son('shao',20)
 console.log(son1.getName()) // shao
 console.log(son1.getAge()) // 20
+console.log(son1.constructor);
