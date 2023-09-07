@@ -10,18 +10,23 @@
     class Student {
         constructor(name) {
             this.name = 'Jarry'
+            this.age = 18
         }
-        getInfo = function() {
+
+        getInfo = () => {
+            console.log(this.age)
+            this.age = 28;
             return {
                 name: 'Tom',
-                getName() {
-                    return this.name
+                getName:()=> {
+                    return this.age
                 }
             }
         }
     }
     const stu = new Student()
-    console.log(stu.getInfo().getName())
+    const t = stu.getInfo().getName()
+    console.log(t)
 </script>
 
 <body>

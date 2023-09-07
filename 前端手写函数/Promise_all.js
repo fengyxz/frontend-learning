@@ -6,7 +6,7 @@
 Promise._all = function(promises) {
   return new Promise((resolve, reject) => {
     if (promises === null || typeof promises[Symbol.iterator] !== "function") {
-      throw new TypeError(`${promises} is not a interable`);
+      throw new TypeError(`${promises} is not interable`);
     }
     // promises = [...promises];
 
