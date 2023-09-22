@@ -14,19 +14,22 @@
         }
 
         getInfo = () => {
-            console.log(this.age)
             this.age = 28;
             return {
                 name: 'Tom',
-                getName:()=> {
+                age:19,
+                getName() {
                     return this.age
                 }
             }
         }
     }
+    const a = {
+        age:1111
+    }
     const stu = new Student()
-    const t = stu.getInfo().getName()
-    console.log(t)
+    const t = stu.getInfo().getName;
+    console.log(t.apply(a))
 </script>
 
 <body>
