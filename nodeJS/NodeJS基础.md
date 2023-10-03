@@ -452,3 +452,75 @@ JS本身是单线程的，无法异步执行，因此我们可以认为setTimeou
 
 JS是单线程运行的这个事实决定了JS在执行完一段代码之前无法执行包括回调函数在内的别的代码。也就是说，即使平行线程完成工作了，通知JS主线程执行回调函数了，回调函数也要等到JS主线程空闲时才能开始执行。
 
+### 异常处理
+JS自身提供的异常捕获和处理机制--`try...catch...`只能用于同步执行的代码
+```javascript
+function sync(fn) {
+  return fn();
+}
+
+try{
+  sync(null);
+  //do something
+}catch(err){
+  console.log('Error: %s',err.message);
+}
+```
+
+异常会沿着代码执行路径一直冒泡，直到遇到第一个try语句时被捕获。但由于异步函数会打断代码执行路径，异步函数执行过程中以及执行之后产生的异常冒泡到执行路径被打断的位置时，如果一直没遇到try语句，就作为一个全局异常抛出。
+```javascript
+function async(fn, callback) {
+    // Code execution path breaks here.
+    setTimeout(function ()　{
+        callback(fn());
+    }, 0);
+}
+
+try {
+    async(null, function (data) {
+        // Do something.
+    });
+} catch (err) {
+    console.log('Error: %s', err.message);
+}
+
+-- Console ------------------------------
+/home/user/test.js:4
+        callback(fn());
+                 ^
+TypeError: object is not a function
+    at null._onTimeout (/home/user/test.js:4:13)
+    at Timer.listOnTimeout [as ontimeout] (timers.js:110:15)
+```
+
+因为代码执行路径被打断了，我们就需要再异常冒泡到断电之前用try语句把异常捕获，并通过回调函数传递被捕获的异常。
+
+```javascript
+function async(fn, callback) {
+  setTimeout(function(){
+    try{
+      callback(null, fn());
+    }catch(err){
+      callback(err);
+    }
+  })
+}
+
+async(null, function(err,data){
+  if(err){
+    console.log('Error: %s',err.message);
+  }else{
+    //data...
+  }
+})
+
+-- Console ------------------------------
+Error: object is not a function
+```
+如此，异常再次被捕获住了。在NodeJS中，几乎所有异步API都按照以上方式设计，回调函数中的第一个参数都是err。
+
+也就是说如果是同步代码，能够很好地用一个try去包，但是如果是异步代码，则需要不断进行函数回调，造成回调地狱。
+
+### 域
+NodeJS提供了domain模块，可以简化异步代码的异常处理。
+为了让代码好看点，我们可以在每处理一个请求时，使用domain模块创建一个子域（JS子运行环境）。在子域内运行的代码可以随意抛出异常，而这些异常可以通过子域对象的error事件统一捕获。
