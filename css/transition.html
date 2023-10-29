@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .parent{
+    background-color: hsla(200,100%,20%);
+    height: 400px;
+    width: 400px;
+  }
+  .child{
+    background-color: red;
+    height:50%;
+    width:50%;
+    transition: transform 1s ease-in-out;
+  }
+  .parent:hover .child{
+    transform: translateX(100%);
+  }
+
+</style>
+<body>
+  <div class="parent">
+    <div class="child"></div>
+  </div>
+  <ul>
+    <li>transition只是简单过渡，只有两帧-开始和结束；而animation可绘制复杂动画，可以结合keyframes去绘制每一帧</li>
+    <li>transition需要hover或者js事件，用交互去触发；而animation不需要任何触发事件也可以自发开始（也可以触发、暂停）</li>
+    <li>transition只能触发单次；而animation可以设置循环次数</li>
+    <li>transform:可以实现移动（translate）、旋转（rotate）、缩放（scale）、倾斜（skew）等效果，其中tranform属性运用于dom元素自身，translate等具体属性用于hover等伪类</li>
+  </ul>
+</body>
+</html>
