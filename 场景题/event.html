@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <p>场景题： 如何在多个li标签进行事件绑定</p>
+  <p>知识点： 事件冒泡和捕获机制</p>
+  <p>拓展： react事件合成：事件委托 + 自动绑定</p>
+  <ul id="myList">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+  </ul>
+</body>
+<script>
+  const ul = document.querySelector("#myList")
+  ul.addEventListener("click", (e) => {
+    if (e.target && e.target.nodeName === "LI") {
+      alert("click" + e.target.textContent)
+    }
+  }, true)
+</script>
+
+</html>
